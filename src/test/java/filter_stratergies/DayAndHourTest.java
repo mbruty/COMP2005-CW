@@ -1,5 +1,6 @@
 package filter_stratergies;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import types.OperatingHours;
@@ -8,64 +9,80 @@ import types.Restaurant;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DayAndHourTest {
-    private IFilter filter;
-    private IFilter filterFromString;
-    private IFilter invalidDayFilter;
+    private static IFilter filter;
+    private static IFilter filterFromString;
+    private static IFilter invalidDayFilter;
 
-    private Restaurant mondayBeforeLunch;
-    private Restaurant closedOnMonday;
-    private Restaurant mondayBeforeAndAfterLunch;
-    private Restaurant mondayAllDay;
-    private Restaurant tuesdayAllDay;
-    private Restaurant missingOpeningHours;
-    @BeforeEach
-    void setUp() {
+    private static Restaurant mondayBeforeLunch;
+    private static Restaurant closedOnMonday;
+    private static Restaurant mondayBeforeAndAfterLunch;
+    private static Restaurant mondayAllDay;
+    private static Restaurant tuesdayAllDay;
+    private static Restaurant missingOpeningHours;
+
+    // Has to be done inside a before each as
+    @BeforeAll
+    static void setUp() {
         OperatingHours openHours = new OperatingHours();
         openHours.setMonday("9:00 am - 11:00 am");
-        this.mondayBeforeLunch = new Restaurant(openHours);
+        mondayBeforeLunch = new Restaurant(openHours);
 
         openHours = new OperatingHours();
         openHours.setMonday("Closed");
-        this.closedOnMonday = new Restaurant(openHours);
+        closedOnMonday = new Restaurant(openHours);
 
         openHours = new OperatingHours();
         openHours.setMonday("9:00 am - 11:00 am, 13:00 pm - 6:00 pm");
-        this.mondayBeforeAndAfterLunch = new Restaurant(openHours);
+        mondayBeforeAndAfterLunch = new Restaurant(openHours);
 
         openHours = new OperatingHours();
         openHours.setMonday("Open 24 hours");
-        this.mondayAllDay = new Restaurant(openHours);
+        mondayAllDay = new Restaurant(openHours);
 
         openHours = new OperatingHours();
         openHours.setTuesday("1:00am - 12:00pm");
-        this.tuesdayAllDay = new Restaurant(openHours);
+        tuesdayAllDay = new Restaurant(openHours);
 
-        this.missingOpeningHours = new Restaurant();
+        missingOpeningHours = new Restaurant();
 
-        this.filter = new DayAndHour("Monday", 12, 0);
-        this.filterFromString = new DayAndHour("Monday", "12", "0");
-        this.invalidDayFilter = new DayAndHour("NotADay", 12, 0);
+        filter = new DayAndHour("Monday", 12, 0);
+        filterFromString = new DayAndHour("Monday", "12", "0");
+        invalidDayFilter = new DayAndHour("NotADay", 12, 0);
     }
 
     @Test
-    void doCompareWithIntFilter() {
+    void compareBeforeSetTime() {
         assertFalse(filter.doCompare(mondayBeforeLunch));
-        assertFalse(filter.doCompare(closedOnMonday));
-        assertFalse(filter.doCompare(mondayBeforeAndAfterLunch));
-        assertFalse(filter.doCompare(tuesdayAllDay));
-        assertFalse(filter.doCompare(missingOpeningHours));
-
-        assertTrue(filter.doCompare(mondayAllDay));
+        assertFalse(filterFromString.doCompare(mondayBeforeLunch));
     }
 
     @Test
-    void doCompareWithStringFilter() {
-        assertFalse(filterFromString.doCompare(mondayBeforeLunch));
+    void compareOnClosedDay() {
+        assertFalse(filter.doCompare(closedOnMonday));
         assertFalse(filterFromString.doCompare(closedOnMonday));
-        assertFalse(filterFromString.doCompare(mondayBeforeAndAfterLunch));
-        assertFalse(filterFromString.doCompare(tuesdayAllDay));
-        assertFalse(filterFromString.doCompare(missingOpeningHours));
+    }
 
+    @Test
+    void compareBetweenTwoOpeningTimes() {
+        assertFalse(filter.doCompare(mondayBeforeAndAfterLunch));
+        assertFalse(filterFromString.doCompare(mondayBeforeAndAfterLunch));
+    }
+
+    @Test
+    void compareNoDataOnDay() {
+        assertFalse(filter.doCompare(tuesdayAllDay));
+        assertFalse(filterFromString.doCompare(tuesdayAllDay));
+    }
+
+    @Test
+    void compareMissingData() {
+        assertFalse(filter.doCompare(missingOpeningHours));
+        assertFalse(filterFromString.doCompare(missingOpeningHours));
+    }
+
+    @Test
+    void compareOpenOnDayAndTime() {
+        assertTrue(filter.doCompare(mondayAllDay));
         assertTrue(filterFromString.doCompare(mondayAllDay));
     }
 

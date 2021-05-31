@@ -1,6 +1,6 @@
 package filter_stratergies;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import types.Neighborhood;
 import types.Restaurant;
@@ -8,35 +8,47 @@ import types.Restaurant;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CuisineInNeighbourhoodTest {
-    private Restaurant wrongCuisine;
-    private Restaurant wrongNbhood;
-    private Restaurant noCuisine;
-    private Restaurant nullRestaurant;
-    private Restaurant match;
-    private IFilter filter;
-    @BeforeEach
-    void setUp() {
-        try {
-            this.wrongCuisine = new Restaurant(Neighborhood.forValue("Manhattan"), "Italian");
-            this.wrongNbhood = new Restaurant(Neighborhood.forValue("Queens"), "Chinese");
-            this.noCuisine = new Restaurant(Neighborhood.forValue("Manhattan"), "");
-            this.nullRestaurant = new Restaurant();
+    private static Restaurant wrongCuisine;
+    private static Restaurant wrongNbhood;
+    private static Restaurant noCuisine;
+    private static Restaurant emptyRestaurant;
+    private static Restaurant match;
+    private static IFilter filter;
 
-            this.match = new Restaurant(Neighborhood.forValue("Manhattan"), "Chinese");
+    @BeforeAll
+    static void setUp() {
+        wrongCuisine = new Restaurant(Neighborhood.Manhattan, "Italian");
+        wrongNbhood = new Restaurant(Neighborhood.Queens, "Chinese");
+        noCuisine = new Restaurant(Neighborhood.Manhattan, "");
+        emptyRestaurant = new Restaurant();
 
-            this.filter = new CuisineInNeighbourhood("Chinese", "Manhattan");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        match = new Restaurant(Neighborhood.Manhattan, "Chinese");
+
+        filter = new CuisineInNeighbourhood("Chinese", Neighborhood.Manhattan);
     }
 
     @Test
-    void doCompare() {
+    void compareWrongCuisine() {
         assertFalse(filter.doCompare(wrongCuisine));
-        assertFalse(filter.doCompare(wrongNbhood));
-        assertFalse(filter.doCompare(noCuisine));
-        assertFalse(filter.doCompare(nullRestaurant));
+    }
 
+    @Test
+    void compareWrongNeighbourhood() {
+        assertFalse(filter.doCompare(wrongNbhood));
+    }
+
+    @Test
+    void compareEmptyCuisine() {
+        assertFalse(filter.doCompare(noCuisine));
+    }
+
+    @Test
+    void compareRestaurantWithNoData() {
+        assertFalse(filter.doCompare(emptyRestaurant));
+    }
+
+    @Test
+    void compareSameNeighbourhoodAndCuisine() {
         assertTrue(filter.doCompare(match));
     }
 }
