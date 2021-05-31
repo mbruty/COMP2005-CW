@@ -17,6 +17,9 @@ public class RatingInNeighbourhood implements IFilter {
         if(!restaurant.getNeighborhood().equals(this.neighbourhood)) {
             return false;
         }
+        if(restaurant.getReviews() == null || restaurant.getReviews().length < 1) {
+            return false;
+        }
         int accumulator = 0;
         for (Review r:
              restaurant.getReviews()) {
