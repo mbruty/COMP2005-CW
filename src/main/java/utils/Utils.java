@@ -1,10 +1,7 @@
 package utils;
 
 import filter_stratergies.NeighbourhoodFilter;
-import types.Hotel;
-import types.Latlng;
-import types.ResponseObj;
-import types.Restaurant;
+import types.*;
 
 import javax.management.InstanceNotFoundException;
 import java.util.ArrayList;
@@ -33,11 +30,11 @@ public class Utils {
         return Math.sqrt(distance);
     }
 
-    public static KeyValuePair<Restaurant, Double>[] getRestaurantsByDistance(String neighbourhood, ResponseObj data) throws Exception {
+    public static KeyValuePair<Restaurant, Double>[] getRestaurantsByDistance(Neighborhood neighbourhood, ResponseObj data) throws Exception {
         Hotel hotel = null;
         for (Hotel h:
              hotels) {
-            if(h.getNeighborhood().toValue().equals(neighbourhood)) {
+            if(h.getNeighborhood().equals(neighbourhood)) {
                 hotel = h;
             }
         }

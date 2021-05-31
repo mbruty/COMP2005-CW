@@ -51,7 +51,7 @@ public class Main {
 
             System.out.println(Utils.calcDistance( new Latlng(50.375148, -4.139186), new Latlng(50.396614, -4.036022)));
 
-            KeyValuePair<Restaurant, Double>[] distances = Utils.getRestaurantsByDistance("Brooklyn", data);
+            KeyValuePair<Restaurant, Double>[] distances = Utils.getRestaurantsByDistance(Neighborhood.Brooklyn, data);
             for(KeyValuePair<Restaurant, Double> kv:
                 distances) {
                 System.out.println(kv.getKey().getName() + "\t" + kv.getValue().toString());
