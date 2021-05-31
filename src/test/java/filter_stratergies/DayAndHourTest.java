@@ -13,6 +13,7 @@ class DayAndHourTest {
     private IFilter invalidDayFilter;
 
     private Restaurant mondayBeforeLunch;
+    private Restaurant closedOnMonday;
     private Restaurant mondayBeforeAndAfterLunch;
     private Restaurant mondayAllDay;
     private Restaurant tuesdayAllDay;
@@ -22,6 +23,10 @@ class DayAndHourTest {
         OperatingHours openHours = new OperatingHours();
         openHours.setMonday("9:00 am - 11:00 am");
         this.mondayBeforeLunch = new Restaurant(openHours);
+
+        openHours = new OperatingHours();
+        openHours.setMonday("Closed");
+        this.closedOnMonday = new Restaurant(openHours);
 
         openHours = new OperatingHours();
         openHours.setMonday("9:00 am - 11:00 am, 13:00 pm - 6:00 pm");
@@ -45,6 +50,7 @@ class DayAndHourTest {
     @Test
     void doCompareWithIntFilter() {
         assertFalse(filter.doCompare(mondayBeforeLunch));
+        assertFalse(filter.doCompare(closedOnMonday));
         assertFalse(filter.doCompare(mondayBeforeAndAfterLunch));
         assertFalse(filter.doCompare(tuesdayAllDay));
         assertFalse(filter.doCompare(missingOpeningHours));
@@ -55,6 +61,7 @@ class DayAndHourTest {
     @Test
     void doCompareWithStringFilter() {
         assertFalse(filterFromString.doCompare(mondayBeforeLunch));
+        assertFalse(filterFromString.doCompare(closedOnMonday));
         assertFalse(filterFromString.doCompare(mondayBeforeAndAfterLunch));
         assertFalse(filterFromString.doCompare(tuesdayAllDay));
         assertFalse(filterFromString.doCompare(missingOpeningHours));
