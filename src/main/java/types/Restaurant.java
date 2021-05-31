@@ -27,6 +27,11 @@ public class Restaurant implements Cloneable{
         this.cuisineType = cuisine;
     }
 
+    public Restaurant(Review[] reviews, Neighborhood nbhood) {
+        this.reviews = reviews;
+        this.neighborhood = nbhood;
+    }
+
     public Restaurant(OperatingHours hours) {
         this.operatingHours = hours;
     }
