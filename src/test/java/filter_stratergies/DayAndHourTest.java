@@ -9,6 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DayAndHourTest {
     private IFilter filter;
+    private IFilter filterFromString;
+    private IFilter invalidDayFilter;
+
     private Restaurant mondayBeforeLunch;
     private Restaurant mondayBeforeAndAfterLunch;
     private Restaurant mondayAllDay;
@@ -35,15 +38,37 @@ class DayAndHourTest {
         this.missingOpeningHours = new Restaurant();
 
         this.filter = new DayAndHour("Monday", 12, 0);
+        this.filterFromString = new DayAndHour("Monday", "12", "0");
+        this.invalidDayFilter = new DayAndHour("NotADay", 12, 0);
     }
 
     @Test
-    void doCompare() {
+    void doCompareWithIntFilter() {
         assertFalse(filter.doCompare(mondayBeforeLunch));
         assertFalse(filter.doCompare(mondayBeforeAndAfterLunch));
         assertFalse(filter.doCompare(tuesdayAllDay));
         assertFalse(filter.doCompare(missingOpeningHours));
 
         assertTrue(filter.doCompare(mondayAllDay));
+    }
+
+    @Test
+    void doCompareWithStringFilter() {
+        assertFalse(filterFromString.doCompare(mondayBeforeLunch));
+        assertFalse(filterFromString.doCompare(mondayBeforeAndAfterLunch));
+        assertFalse(filterFromString.doCompare(tuesdayAllDay));
+        assertFalse(filterFromString.doCompare(missingOpeningHours));
+
+        assertTrue(filterFromString.doCompare(mondayAllDay));
+    }
+
+    @Test
+    void doCompareWithInvalidDay() {
+        assertFalse(invalidDayFilter.doCompare(mondayAllDay));
+    }
+
+    @Test
+    void invalidTimeThrowsError() {
+        assertThrows(NumberFormatException.class, () -> new DayAndHour("Monday", "Twelve pm", "5"));
     }
 }
