@@ -3,6 +3,7 @@ import filter_stratergies.CuisineInNeighbourhood;
 import filter_stratergies.DayAndHour;
 import filter_stratergies.RatingInNeighbourhood;
 import types.Latlng;
+import types.Neighborhood;
 import types.ResponseObj;
 import types.Restaurant;
 import utils.DOHMHDsc;
@@ -24,7 +25,7 @@ public class Main {
             return;
         }
         try {
-            List<Restaurant> filtered = data.filter(new CuisineInNeighbourhood("American", "Manhattan"));
+            List<Restaurant> filtered = data.filter(new CuisineInNeighbourhood("American", Neighborhood.Manhattan));
             for (Restaurant r:
                  filtered) {
                 System.out.println(r.getName());
@@ -36,7 +37,7 @@ public class Main {
                 System.out.println(r.getName());
             }
 
-            List<Restaurant> filtered3 = data.filter(new RatingInNeighbourhood(4, "Manhattan"));
+            List<Restaurant> filtered3 = data.filter(new RatingInNeighbourhood(4, Neighborhood.Manhattan));
             for (Restaurant r:
                     filtered3) {
                 System.out.println(r.getName() + "\t" + Arrays.toString(r.getReviews()));

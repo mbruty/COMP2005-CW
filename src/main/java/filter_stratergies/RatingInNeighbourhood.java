@@ -1,19 +1,20 @@
 package filter_stratergies;
 
+import types.Neighborhood;
 import types.Restaurant;
 import types.Review;
 
 public class RatingInNeighbourhood implements IFilter {
     private final float minRating;
-    private final String neighbourhood;
+    private final Neighborhood neighbourhood;
 
-    public RatingInNeighbourhood(float rating, String neighbourhood) {
+    public RatingInNeighbourhood(float rating, Neighborhood neighbourhood) {
         this.minRating = rating;
         this.neighbourhood = neighbourhood;
     }
     @Override
     public boolean doCompare(Restaurant restaurant) {
-        if(!restaurant.getNeighborhood().toValue().equals(this.neighbourhood)) {
+        if(!restaurant.getNeighborhood().equals(this.neighbourhood)) {
             return false;
         }
         int accumulator = 0;
