@@ -51,7 +51,7 @@ public class ResponseObj {
         return copy;
     }
 
-    private Restaurant[] cloneRestaurants() {
+    public Restaurant[] cloneRestaurants() {
         Restaurant[] copy = new Restaurant[this.restaurants.length];
         try {
             for (int i = 0; i < this.restaurants.length; i++) {

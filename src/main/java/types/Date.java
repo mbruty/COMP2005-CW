@@ -1,7 +1,5 @@
 package types;
 
-import java.util.Arrays;
-
 public class Date {
     private int openHours;
     private int openMins;
@@ -37,7 +35,7 @@ public class Date {
         }
     }
 
-    private int[] stringToHoursMins(String value) throws Exception {
+    public static int[] stringToHoursMins(String value) throws Exception {
         value = value.trim();
         String[] data = value.split(" ");
         boolean isPm;
@@ -48,14 +46,17 @@ public class Date {
         }
         int hours = 0;
         int mins = 0;
-        try{
-            hours = Integer.parseInt(data[0].split(":")[0]);
-            mins = openMins = Integer.parseInt(data[0].split(":")[1]);
-        } catch (NumberFormatException e) {
-            System.out.println(Arrays.toString(data));
+        hours = Integer.parseInt(data[0].split(":")[0]);
+        mins = Integer.parseInt(data[0].split(":")[1]);
+
+
+        if(hours < 0 || mins < 0){
+            throw new Exception("Time cannot be negative");
         }
 
-
+        if(hours > 12 || mins > 60) {
+            throw new Exception("Maximum time exceded");
+        }
         if(isPm) {
             hours += 12;
         }
@@ -63,6 +64,7 @@ public class Date {
     }
 
     public String toString() {
+        if(this.isClosed) return "Closed";
         return this.openHours +
                 ":" +
                 this.openMins +
@@ -77,10 +79,10 @@ public class Date {
             return false;
         }
         if(hour == this.openHours) {
-            return min < this.openMins;
+            return min >= this.openMins;
         }
         if(hour == this.closeHours) {
-            return min > this.openMins;
+            return min <= this.closeMins;
         }
 
         return this.openHours < hour && hour < this.closeHours;

@@ -39,7 +39,7 @@ public class OperatingHours {
     @JsonProperty("Sunday")
     public void setSunday(String value) { this.sunday = stringToDateArray(value); }
 
-    private Date[] stringToDateArray(String value) {
+    public Date[] stringToDateArray(String value) {
         if(value.equals("Open 24 hours")) {
             Date[] hours = new Date[] { new Date("0:00 am - 12:00 pm") };
             return hours;
