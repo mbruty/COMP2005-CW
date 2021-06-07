@@ -38,6 +38,23 @@ class DateTest {
         assertEquals("0:0 - 17:0", d.toString());
     }
 
+    // The next two tests ensure that an invalid argument results in a thrown error.
+    // All the possible reasons to throw an error are covered in the stringToHours tests
+    @Test
+    void constructorInvalidOpeningTimeTest() {
+        assertThrows(IllegalArgumentException.class, () -> new Date("13:00 pm - 9:00 pm"));
+    }
+
+    @Test
+    void constructorInvalidClosingTimeTest() {
+        assertThrows(IllegalArgumentException.class, () -> new Date("9:00 am - 13:00 pm"));
+    }
+
+    @Test
+    void constructorCloseBeforeOpenTest() {
+        assertThrows(IllegalArgumentException.class, () -> new Date("10:00 am - 9:00 am"));
+    }
+
     @Test
     void stringToHoursMissingAmOrPm() {
         assertThrows(Exception.class, () -> Date.stringToHoursMins("11:30"));
@@ -55,17 +72,17 @@ class DateTest {
 
     @Test
     void stringToHoursNegativeTime() {
-        assertThrows(Exception.class, () -> Date.stringToHoursMins("-1:30 am"));
+        assertThrows(IllegalArgumentException.class, () -> Date.stringToHoursMins("-1:30 am"));
     }
 
     @Test
     void stringToHoursTooLargeHours() {
-        assertThrows(Exception.class, () -> Date.stringToHoursMins("30:30 am"));
+        assertThrows(IllegalArgumentException.class, () -> Date.stringToHoursMins("30:30 am"));
     }
 
     @Test
     void stringToHoursTooLargeMins() {
-        assertThrows(Exception.class, () -> Date.stringToHoursMins("10:66 am"));
+        assertThrows(IllegalArgumentException.class, () -> Date.stringToHoursMins("10:66 am"));
     }
 
     @Test

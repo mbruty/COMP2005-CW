@@ -38,6 +38,10 @@ public class ResponseObj {
     }
 
     public Restaurant[] sort(ISort sortStrategy) {
+        // Throw an error if there is no array
+        if(this.restaurants == null || this.restaurants.length == 0) {
+            throw new IllegalArgumentException("There are no elements o sort on");
+        }
         // Clone the original array
         // The sort implementation does an in place sort
         Restaurant [] copy = this.cloneRestaurants();

@@ -9,7 +9,7 @@ public class Date {
 
     private boolean isClosed = false;
 
-    public Date(String time) {
+    public Date(String time) throws IllegalArgumentException {
         if(time.equals("Closed")) {
             this.isClosed = true;
             return;
@@ -21,6 +21,8 @@ public class Date {
             int[] opens = stringToHoursMins(open);
             this.openHours = opens[0];
             this.openMins = opens[1];
+        } catch (IllegalArgumentException e){
+            throw e;
         } catch (Exception e) {
             this.openHours = 0;
             this.openMins = 0;
@@ -29,9 +31,15 @@ public class Date {
             int[] closes = stringToHoursMins(close);
             this.closeHours = closes[0];
             this.closeMins = closes[1];
+        } catch (IllegalArgumentException e){
+            throw e;
         } catch (Exception e) {
             this.openHours = 24;
             this.openMins = 0;
+        }
+
+        if(this.openHours > this.closeHours) {
+            throw new IllegalArgumentException("Opening time cannot be before closing time");
         }
     }
 
@@ -51,11 +59,11 @@ public class Date {
 
 
         if(hours < 0 || mins < 0){
-            throw new Exception("Time cannot be negative");
+            throw new IllegalArgumentException("Time cannot be negative");
         }
 
         if(hours > 12 || mins > 60) {
-            throw new Exception("Maximum time exceded");
+            throw new IllegalArgumentException("Maximum time exceded");
         }
         if(isPm) {
             hours += 12;

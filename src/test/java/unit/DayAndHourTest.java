@@ -32,7 +32,7 @@ class DayAndHourTest {
         closedOnMonday = new Restaurant(openHours);
 
         openHours = new OperatingHours();
-        openHours.setMonday("9:00 am - 11:00 am, 13:00 pm - 6:00 pm");
+        openHours.setMonday("9:00 am - 11:00 am, 1:00 pm - 6:00 pm");
         mondayBeforeAndAfterLunch = new Restaurant(openHours);
 
         openHours = new OperatingHours();
@@ -40,7 +40,7 @@ class DayAndHourTest {
         mondayAllDay = new Restaurant(openHours);
 
         openHours = new OperatingHours();
-        openHours.setTuesday("1:00am - 12:00pm");
+        openHours.setTuesday("1:00 am - 12:00 pm");
         tuesdayAllDay = new Restaurant(openHours);
 
         missingOpeningHours = new Restaurant();
