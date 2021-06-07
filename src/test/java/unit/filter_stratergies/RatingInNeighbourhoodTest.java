@@ -1,5 +1,7 @@
-package filter_stratergies;
+package unit.filter_stratergies;
 
+import filter_stratergies.IFilter;
+import filter_stratergies.RatingInNeighbourhood;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import types.Neighborhood;

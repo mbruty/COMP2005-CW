@@ -1,5 +1,7 @@
-package filter_stratergies;
+package unit.filter_stratergies;
 
+import filter_stratergies.DayAndHour;
+import filter_stratergies.IFilter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

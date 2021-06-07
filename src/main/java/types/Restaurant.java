@@ -3,7 +3,7 @@ package types;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Restaurant implements Cloneable{
-    private long id; // 1
+    private long id;
     private String name;
     private int DOHMH_inspection_score;
     private Neighborhood neighborhood;

@@ -38,6 +38,19 @@ public class Date {
             this.openMins = 0;
         }
 
+        // Special parsing for the 12am = midnight / 12pm = noon
+        if(open.equals("12:00 am ")) {
+            this.openHours = 24;
+        }
+        if(close.equals(" 12:00 am")) {
+            this.closeHours = 24;
+        }
+        if(open.equals("12:00 pm ")) {
+            this.openHours = 12;
+        }
+        if(close.equals(" 12:00 pm")) {
+            this.closeHours = 12;
+        }
         if(this.openHours > this.closeHours) {
             throw new IllegalArgumentException("Opening time cannot be before closing time");
         }

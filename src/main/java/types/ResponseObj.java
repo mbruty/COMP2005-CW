@@ -2,10 +2,10 @@ package types;
 
 import filter_stratergies.IFilter;
 import utils.ISort;
+import utils.KeyValuePair;
 import utils.Sort;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ResponseObj {
@@ -40,7 +40,7 @@ public class ResponseObj {
     public Restaurant[] sort(ISort sortStrategy) {
         // Throw an error if there is no array
         if(this.restaurants == null || this.restaurants.length == 0) {
-            throw new IllegalArgumentException("There are no elements o sort on");
+            throw new IllegalArgumentException("There are no elements to sort on");
         }
         // Clone the original array
         // The sort implementation does an in place sort

@@ -1,8 +1,8 @@
 package types;
 
 public class Latlng {
-    private double lat;
-    private double lng;
+    private Double lat;
+    private Double lng;
 
     public Latlng(double lat, double lng) {
         this.lat = lat;
@@ -12,9 +12,9 @@ public class Latlng {
     // Empty constructor for deserialization
     public Latlng() { }
 
-    public double getLat() { return lat; }
+    public Double getLat() { return lat; }
     public void setLat(double value) { this.lat = value; }
 
-    public double getLng() { return lng; }
+    public Double getLng() { return lng; }
     public void setLng(double value) { this.lng = value; }
 }
