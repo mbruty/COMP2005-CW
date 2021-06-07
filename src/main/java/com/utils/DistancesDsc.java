@@ -1,6 +1,6 @@
-package utils;
+package com.utils;
 
-import types.Restaurant;
+import com.types.Restaurant;
 
 public class DistancesDsc implements ISort {
     @Override

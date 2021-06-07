@@ -1,8 +1,8 @@
-package filter_stratergies;
+package com.filter_stratergies;
 
-import types.Date;
-import types.OperatingHours;
-import types.Restaurant;
+import com.types.Date;
+import com.types.OperatingHours;
+import com.types.Restaurant;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

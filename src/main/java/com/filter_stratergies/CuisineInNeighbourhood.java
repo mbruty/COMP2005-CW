@@ -1,7 +1,7 @@
-package filter_stratergies;
+package com.filter_stratergies;
 
-import types.Neighborhood;
-import types.Restaurant;
+import com.types.Neighborhood;
+import com.types.Restaurant;
 
 public class CuisineInNeighbourhood implements IFilter {
     private final String cuisine;

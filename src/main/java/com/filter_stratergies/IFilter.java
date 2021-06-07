@@ -1,6 +1,6 @@
-package filter_stratergies;
+package com.filter_stratergies;
 
-import types.Restaurant;
+import com.types.Restaurant;
 
 public interface IFilter {
     boolean doCompare(Restaurant restaurant);

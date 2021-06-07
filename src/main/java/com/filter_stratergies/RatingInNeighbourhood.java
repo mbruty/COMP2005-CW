@@ -1,8 +1,8 @@
-package filter_stratergies;
+package com.filter_stratergies;
 
-import types.Neighborhood;
-import types.Restaurant;
-import types.Review;
+import com.types.Neighborhood;
+import com.types.Restaurant;
+import com.types.Review;
 
 public class RatingInNeighbourhood implements IFilter {
     private final float minRating;
