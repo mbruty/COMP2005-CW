@@ -8,7 +8,8 @@ import types.Neighborhood;
 import types.Restaurant;
 import types.Review;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RatingInNeighbourhoodTest {
     private static Restaurant outsideNeighbourhood;
@@ -20,6 +21,7 @@ class RatingInNeighbourhoodTest {
     private static Restaurant ratingOfThreePointNine;
     private static Restaurant ratingOfThreePointFive;
     private static IFilter filter;
+
     @BeforeAll
     static void setup() {
         outsideNeighbourhood = new Restaurant(Neighborhood.Queens, "");
@@ -28,15 +30,15 @@ class RatingInNeighbourhoodTest {
         nullReviews = new Restaurant(Neighborhood.Manhattan, "");
 
         Review[] emptyReviews = new Review[0];
-        noReviews = new Restaurant(emptyReviews ,Neighborhood.Manhattan);
+        noReviews = new Restaurant(emptyReviews, Neighborhood.Manhattan);
 
-        Review[] nullRating = new Review[] {
+        Review[] nullRating = new Review[]{
                 new Review()
         };
 
         nullRatings = new Restaurant(nullRating, Neighborhood.Manhattan);
 
-        Review[] averageOfFourPointFive = new Review[] {
+        Review[] averageOfFourPointFive = new Review[]{
                 new Review(5),
                 new Review(5),
                 new Review(4),
@@ -45,7 +47,7 @@ class RatingInNeighbourhoodTest {
 
         ratingOfFourPointFive = new Restaurant(averageOfFourPointFive, Neighborhood.Manhattan);
 
-        Review[] averageOfFour = new Review[] {
+        Review[] averageOfFour = new Review[]{
                 new Review(5),
                 new Review(4),
                 new Review(3),
@@ -53,7 +55,7 @@ class RatingInNeighbourhoodTest {
 
         ratingOfFour = new Restaurant(averageOfFour, Neighborhood.Manhattan);
 
-        Review[] averageOfThreePointNine = new Review[] {
+        Review[] averageOfThreePointNine = new Review[]{
                 new Review(4),
                 new Review(4),
                 new Review(4),
@@ -69,7 +71,7 @@ class RatingInNeighbourhoodTest {
 
         ratingOfThreePointNine = new Restaurant(averageOfThreePointNine, Neighborhood.Manhattan);
 
-        Review[] averageOfThreePointFive = new Review[] {
+        Review[] averageOfThreePointFive = new Review[]{
                 new Review(4),
                 new Review(4),
                 new Review(3),
@@ -80,26 +82,42 @@ class RatingInNeighbourhoodTest {
     }
 
     @Test
-    void outsideNeighbourhood() { assertFalse(filter.doCompare(outsideNeighbourhood)); }
+    void outsideNeighbourhood() {
+        assertFalse(filter.doCompare(outsideNeighbourhood));
+    }
 
     @Test
-    void nullReviews() { assertFalse(filter.doCompare(nullReviews)); }
+    void nullReviews() {
+        assertFalse(filter.doCompare(nullReviews));
+    }
 
     @Test
-    void noReviews() { assertFalse(filter.doCompare(noReviews)); }
+    void noReviews() {
+        assertFalse(filter.doCompare(noReviews));
+    }
 
     @Test
-    void nullRatings() { assertFalse(filter.doCompare(nullRatings)); }
+    void nullRatings() {
+        assertFalse(filter.doCompare(nullRatings));
+    }
 
     @Test
-    void largerThanMinimumAverageReview() { assertTrue(filter.doCompare(ratingOfFourPointFive)); }
+    void largerThanMinimumAverageReview() {
+        assertTrue(filter.doCompare(ratingOfFourPointFive));
+    }
 
     @Test
-    void exactlyMinimumAverageReview() { assertTrue(filter.doCompare(ratingOfFour)); }
+    void exactlyMinimumAverageReview() {
+        assertTrue(filter.doCompare(ratingOfFour));
+    }
 
     @Test
-    void justBelowMinimumAverageReview() { assertFalse(filter.doCompare(ratingOfThreePointNine)); }
+    void justBelowMinimumAverageReview() {
+        assertFalse(filter.doCompare(ratingOfThreePointNine));
+    }
 
     @Test
-    void belowMinimumAverageReview() { assertFalse(filter.doCompare(ratingOfThreePointFive)); }
+    void belowMinimumAverageReview() {
+        assertFalse(filter.doCompare(ratingOfThreePointFive));
+    }
 }

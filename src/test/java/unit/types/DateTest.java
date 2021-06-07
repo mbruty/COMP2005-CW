@@ -1,6 +1,7 @@
-package types;
+package unit.types;
 
 import org.junit.jupiter.api.Test;
+import types.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,20 +9,20 @@ class DateTest {
 
     @Test
     void stringToHoursPM() {
-        try{
+        try {
             int[] result = Date.stringToHoursMins("11:30 pm");
-            assertArrayEquals(new int[] {23, 30}, result);
-        } catch (Exception e){
+            assertArrayEquals(new int[]{23, 30}, result);
+        } catch (Exception e) {
             fail(e.getMessage());
         }
     }
 
     @Test
     void stringToHoursAM() {
-        try{
+        try {
             int[] result = Date.stringToHoursMins("11:30 am");
-            assertArrayEquals(new int[] {11, 30}, result);
-        } catch (Exception e){
+            assertArrayEquals(new int[]{11, 30}, result);
+        } catch (Exception e) {
             fail(e.getMessage());
         }
     }
@@ -30,6 +31,12 @@ class DateTest {
     void constructorTest() {
         Date d = new Date("9:00 am - 5:00 pm");
         assertEquals("9:0 - 17:0", d.toString());
+    }
+
+    @Test
+    void constructorNoonMidnightTest() {
+        Date d = new Date("12:00 pm - 12:00 am");
+        assertEquals("12:0 - 24:0", d.toString());
     }
 
     @Test

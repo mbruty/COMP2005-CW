@@ -14,47 +14,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ResponseObjTest {
 
-    private class MockFilterTrue implements IFilter {
-        @Override
-        public boolean doCompare(Restaurant restaurant) {
-            return true;
-        }
-    }
-
-    private class MockFilterFalse implements IFilter {
-        @Override
-        public boolean doCompare(Restaurant restaurant) {
-            return false;
-        }
-    }
-
-    private class MockFilterEvenId implements IFilter {
-        @Override
-        public boolean doCompare(Restaurant restaurant) {
-            // mock filter that will sometimes be true, sometimes be false.
-            // Even elements will return true, odd will return false
-            return restaurant.getID() % 2 == 0;
-        }
-    }
-
-    private class MockSortIdDSC implements ISort {
-        @Override
-        public boolean doCompare(Object itemOne, Object itemTwo) {
-            Restaurant one = (Restaurant) itemOne;
-            Restaurant two = (Restaurant) itemTwo;
-            return one.getID() < two.getID();
-        }
-    }
-
     private static Restaurant[] restaurants;
-
     private ResponseObj res;
 
     @BeforeAll
     static void setup() {
         restaurants = new Restaurant[5];
         for (int i = 0; i < 5; i++) {
-            Restaurant r =  new Restaurant();
+            Restaurant r = new Restaurant();
             r.setID(i);
             restaurants[i] = r;
         }
@@ -72,20 +39,21 @@ class ResponseObjTest {
             res.filter(new MockFilterFalse());
         }
         // This should throw an error, but we're not testing that here
-        catch (Exception ignored) { }
+        catch (Exception ignored) {
+        }
         assertEquals(5, restaurants.length);
 
     }
 
     @Test
     void filterAll() {
-        try{
+        try {
             // Filter all true
             List<Restaurant> result = res.filter(new MockFilterTrue());
 
             // No objects should be removed, so the length should be the same
-            assertEquals(restaurants.length ,result.size());
-        } catch (Exception e){
+            assertEquals(restaurants.length, result.size());
+        } catch (Exception e) {
             fail(e.getMessage());
         }
     }
@@ -104,12 +72,12 @@ class ResponseObjTest {
     }
 
     @Test
-    // Testing that the filter will return the correct results from a simple filter
+        // Testing that the filter will return the correct results from a simple filter
     void filterEvenIds() {
         try {
             List<Restaurant> result = res.filter(new MockFilterEvenId());
-            for (Restaurant r:
-                 result) {
+            for (Restaurant r :
+                    result) {
                 assertEquals(r.getID() % 2, 0);
             }
         } catch (Exception e) {
@@ -144,5 +112,37 @@ class ResponseObjTest {
 
     @Test
     void cloneRestaurants() {
+    }
+
+    private class MockFilterTrue implements IFilter {
+        @Override
+        public boolean doCompare(Restaurant restaurant) {
+            return true;
+        }
+    }
+
+    private class MockFilterFalse implements IFilter {
+        @Override
+        public boolean doCompare(Restaurant restaurant) {
+            return false;
+        }
+    }
+
+    private class MockFilterEvenId implements IFilter {
+        @Override
+        public boolean doCompare(Restaurant restaurant) {
+            // mock filter that will sometimes be true, sometimes be false.
+            // Even elements will return true, odd will return false
+            return restaurant.getID() % 2 == 0;
+        }
+    }
+
+    private class MockSortIdDSC implements ISort {
+        @Override
+        public boolean doCompare(Object itemOne, Object itemTwo) {
+            Restaurant one = (Restaurant) itemOne;
+            Restaurant two = (Restaurant) itemTwo;
+            return one.getID() < two.getID();
+        }
     }
 }

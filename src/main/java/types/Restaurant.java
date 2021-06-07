@@ -2,7 +2,7 @@ package types;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Restaurant implements Cloneable{
+public class Restaurant implements Cloneable {
     private long id;
     private String name;
     private int DOHMH_inspection_score;
@@ -14,12 +14,9 @@ public class Restaurant implements Cloneable{
     private OperatingHours operatingHours;
     private Review[] reviews;
 
-    public Restaurant clone() throws CloneNotSupportedException {
-        return (Restaurant) super.clone();
-    }
-
     // Empty constructor for deserialization
-    public Restaurant() { }
+    public Restaurant() {
+    }
 
     // Constructor for Cuisine in neighbourhood test
     public Restaurant(Neighborhood nbhood, String cuisine) {
@@ -36,39 +33,91 @@ public class Restaurant implements Cloneable{
         this.operatingHours = hours;
     }
 
-    public long getID() { return id; }
-    public void setID(long value) { this.id = value; }
+    public Restaurant clone() throws CloneNotSupportedException {
+        return (Restaurant) super.clone();
+    }
 
-    public String getName() { return name; }
-    public void setName(String value) { this.name = value; }
+    public long getID() {
+        return id;
+    }
 
-    public int getDohmhInspectionScore() { return DOHMH_inspection_score; }
+    public void setID(long value) {
+        this.id = value;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String value) {
+        this.name = value;
+    }
+
+    public int getDohmhInspectionScore() {
+        return DOHMH_inspection_score;
+    }
+
     @JsonProperty("DOHMH_inspection_score")
     public void setDohmhInspectionScore(String value) {
-        if(value.equals("")) this.DOHMH_inspection_score = -1;
+        if (value.equals("")) this.DOHMH_inspection_score = -1;
         else this.DOHMH_inspection_score = Integer.parseInt(value);
     }
 
-    public Neighborhood getNeighborhood() { return neighborhood; }
-    public void setNeighborhood(Neighborhood value) { this.neighborhood = value; }
+    public Neighborhood getNeighborhood() {
+        return neighborhood;
+    }
 
-    public String getPhotograph() { return photograph; }
-    public void setPhotograph(String value) { this.photograph = value; }
+    public void setNeighborhood(Neighborhood value) {
+        this.neighborhood = value;
+    }
 
-    public String getAddress() { return address; }
-    public void setAddress(String value) { this.address = value; }
+    public String getPhotograph() {
+        return photograph;
+    }
 
-    public Latlng getLatlng() { return latlng; }
-    public void setLatlng(Latlng value) { this.latlng = value; }
+    public void setPhotograph(String value) {
+        this.photograph = value;
+    }
 
-    public String getCuisineType() { return cuisineType; }
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String value) {
+        this.address = value;
+    }
+
+    public Latlng getLatlng() {
+        return latlng;
+    }
+
+    public void setLatlng(Latlng value) {
+        this.latlng = value;
+    }
+
+    public String getCuisineType() {
+        return cuisineType;
+    }
+
     @JsonProperty("cuisine_type")
-    public void setCuisineType(String value) { this.cuisineType = value; }
+    public void setCuisineType(String value) {
+        this.cuisineType = value;
+    }
 
-    public OperatingHours getOperatingHours() { return operatingHours; }
+    public OperatingHours getOperatingHours() {
+        return operatingHours;
+    }
+
     @JsonProperty("operating_hours")
-    public void setOperatingHours(OperatingHours value) { this.operatingHours = value; }
+    public void setOperatingHours(OperatingHours value) {
+        this.operatingHours = value;
+    }
 
-    public Review[] getReviews() { return reviews; }
-    public void setReviews(Review[] value) { this.reviews = value; }
+    public Review[] getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Review[] value) {
+        this.reviews = value;
+    }
 }

@@ -10,10 +10,10 @@ public class DOHMHDsc implements ISort {
 
         // Move any -1 values to the bottom
         // -1 values are values where the score is ""
-        if(one.getDohmhInspectionScore() == -1) {
+        if (one.getDohmhInspectionScore() == -1) {
             return true;
         }
-        if(two.getDohmhInspectionScore() == -1) {
+        if (two.getDohmhInspectionScore() == -1) {
             return false;
         }
         return one.getDohmhInspectionScore() > two.getDohmhInspectionScore();

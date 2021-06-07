@@ -3,7 +3,7 @@ package unit.types;
 import org.junit.jupiter.api.Test;
 import types.Restaurant;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RestaurantTest {
 

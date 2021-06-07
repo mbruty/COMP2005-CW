@@ -2,7 +2,6 @@ package types;
 
 import filter_stratergies.IFilter;
 import utils.ISort;
-import utils.KeyValuePair;
 import utils.Sort;
 
 import java.util.ArrayList;
@@ -20,18 +19,23 @@ public class ResponseObj {
 
     }
 
-    public Restaurant[] getRestaurants() { return restaurants; }
-    public void setRestaurants(Restaurant[] value) { this.restaurants = value; }
+    public Restaurant[] getRestaurants() {
+        return restaurants;
+    }
+
+    public void setRestaurants(Restaurant[] value) {
+        this.restaurants = value;
+    }
 
     public List<Restaurant> filter(IFilter filterFn) throws Exception {
         List<Restaurant> filtered = new ArrayList<>();
-        for (Restaurant restaurant:
-             this.restaurants) {
-            if(filterFn.doCompare(restaurant)) {
+        for (Restaurant restaurant :
+                this.restaurants) {
+            if (filterFn.doCompare(restaurant)) {
                 filtered.add(restaurant);
             }
         }
-        if(filtered.size() == 0) {
+        if (filtered.size() == 0) {
             throw new Exception("Don't exist, bruh");
         }
         return filtered;
@@ -39,15 +43,15 @@ public class ResponseObj {
 
     public Restaurant[] sort(ISort sortStrategy) {
         // Throw an error if there is no array
-        if(this.restaurants == null || this.restaurants.length == 0) {
+        if (this.restaurants == null || this.restaurants.length == 0) {
             throw new IllegalArgumentException("There are no elements to sort on");
         }
         // Clone the original array
         // The sort implementation does an in place sort
-        Restaurant [] copy = this.cloneRestaurants();
+        Restaurant[] copy = this.cloneRestaurants();
         Sort<Restaurant> sort = new Sort<>(copy);
         sort.changeStrategy(sortStrategy);
-        try{
+        try {
             sort.doSort();
         } catch (Exception e) {
             e.printStackTrace();

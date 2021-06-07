@@ -3,19 +3,24 @@ package utils;
 import filter_stratergies.NeighbourhoodFilter;
 import types.*;
 
-import javax.management.InstanceNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Utils {
-    private static Hotel[] hotels = new Hotel[] {
+    private static final Hotel[] hotels = new Hotel[]{
             new Hotel("Manhattan", 40.752831, -73.985748),
-            new Hotel("Manhattan", 40.752831, -73.985748),
-            new Hotel("Brooklyn", 40.689510  , -73.988100),
+            new Hotel("Queens", 40.753990, -73.949240),
+            new Hotel("Brooklyn", 40.689510, -73.988100),
     };
 
+    public static Hotel[] getHotels() {
+        return hotels;
+    }
+
     public static double calcDistance(Latlng source, Latlng destination) {
+        if (source.getLat() == null || source.getLng() == null || destination.getLat() == null || destination.getLng() == null) {
+            return Double.MAX_VALUE;
+        }
         final int R = 6371; // Radius of the earth
         double latDistance = Math.toRadians(destination.getLat() - source.getLat());
         double lonDistance = Math.toRadians(destination.getLng() - source.getLng());
@@ -32,19 +37,19 @@ public class Utils {
 
     public static KeyValuePair<Restaurant, Double>[] getRestaurantsByDistance(Neighborhood neighbourhood, ResponseObj data) throws Exception {
         Hotel hotel = null;
-        for (Hotel h:
-             hotels) {
-            if(h.getNeighborhood().equals(neighbourhood)) {
+        for (Hotel h :
+                hotels) {
+            if (h.getNeighborhood().equals(neighbourhood)) {
                 hotel = h;
             }
         }
-        if(hotel == null) {
-            throw new InstanceNotFoundException();
+        if (hotel == null) {
+            throw new IllegalArgumentException();
         }
 
         List<Restaurant> restaurantsInNb = data.filter(new NeighbourhoodFilter(neighbourhood));
         List<KeyValuePair<Restaurant, Double>> distances = new ArrayList<>();
-        for (Restaurant r: restaurantsInNb) {
+        for (Restaurant r : restaurantsInNb) {
             Double distance = calcDistance(hotel.getLatlng(), r.getLatlng());
             distances.add(
                     new KeyValuePair<>(r, distance)

@@ -10,7 +10,7 @@ public class Date {
     private boolean isClosed = false;
 
     public Date(String time) throws IllegalArgumentException {
-        if(time.equals("Closed")) {
+        if (time.equals("Closed")) {
             this.isClosed = true;
             return;
         }
@@ -21,7 +21,7 @@ public class Date {
             int[] opens = stringToHoursMins(open);
             this.openHours = opens[0];
             this.openMins = opens[1];
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw e;
         } catch (Exception e) {
             this.openHours = 0;
@@ -31,7 +31,7 @@ public class Date {
             int[] closes = stringToHoursMins(close);
             this.closeHours = closes[0];
             this.closeMins = closes[1];
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw e;
         } catch (Exception e) {
             this.openHours = 24;
@@ -39,19 +39,19 @@ public class Date {
         }
 
         // Special parsing for the 12am = midnight / 12pm = noon
-        if(open.equals("12:00 am ")) {
+        if (open.equals("12:00 am ")) {
             this.openHours = 24;
         }
-        if(close.equals(" 12:00 am")) {
+        if (close.equals(" 12:00 am")) {
             this.closeHours = 24;
         }
-        if(open.equals("12:00 pm ")) {
+        if (open.equals("12:00 pm ")) {
             this.openHours = 12;
         }
-        if(close.equals(" 12:00 pm")) {
+        if (close.equals(" 12:00 pm")) {
             this.closeHours = 12;
         }
-        if(this.openHours > this.closeHours) {
+        if (this.openHours > this.closeHours) {
             throw new IllegalArgumentException("Opening time cannot be before closing time");
         }
     }
@@ -60,8 +60,8 @@ public class Date {
         value = value.trim();
         String[] data = value.split(" ");
         boolean isPm;
-        try{
-             isPm = data[1].equals("pm");
+        try {
+            isPm = data[1].equals("pm");
         } catch (Exception e) {
             throw new Exception("Provided is not a number");
         }
@@ -71,21 +71,21 @@ public class Date {
         mins = Integer.parseInt(data[0].split(":")[1]);
 
 
-        if(hours < 0 || mins < 0){
+        if (hours < 0 || mins < 0) {
             throw new IllegalArgumentException("Time cannot be negative");
         }
 
-        if(hours > 12 || mins > 60) {
+        if (hours > 12 || mins > 60) {
             throw new IllegalArgumentException("Maximum time exceded");
         }
-        if(isPm) {
+        if (isPm) {
             hours += 12;
         }
-        return new int[] { hours, mins };
+        return new int[]{hours, mins};
     }
 
     public String toString() {
-        if(this.isClosed) return "Closed";
+        if (this.isClosed) return "Closed";
         return this.openHours +
                 ":" +
                 this.openMins +
@@ -96,13 +96,13 @@ public class Date {
     }
 
     public boolean isInsideTime(int hour, int min) {
-        if(this.isClosed) {
+        if (this.isClosed) {
             return false;
         }
-        if(hour == this.openHours) {
+        if (hour == this.openHours) {
             return min >= this.openMins;
         }
-        if(hour == this.closeHours) {
+        if (hour == this.closeHours) {
             return min <= this.closeMins;
         }
 

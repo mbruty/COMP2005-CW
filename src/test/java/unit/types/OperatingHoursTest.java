@@ -1,10 +1,11 @@
-package types;
+package unit.types;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import types.Date;
+import types.OperatingHours;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class OperatingHoursTest {
 
@@ -34,19 +35,19 @@ class OperatingHoursTest {
     void stringToDateArrayTwentyFourHours() {
         Date[] result = o.stringToDateArray("Open 24 hours");
 
-        dateArrayEquals(new Date[] { new Date("0:00 am - 12:00 pm") }, result);
+        dateArrayEquals(new Date[]{new Date("0:00 am - 12:00 pm")}, result);
     }
 
     @Test
     void stringToDateArrayOneValue() {
         Date[] result = o.stringToDateArray("9:00 am - 1:30 pm");
-        dateArrayEquals(new Date[] { new Date("9:00 am - 1:30 pm") }, result);
+        dateArrayEquals(new Date[]{new Date("9:00 am - 1:30 pm")}, result);
     }
 
     @Test
     void stringToDateArrayTwoValues() {
         Date[] result = o.stringToDateArray("9:00 am - 1:30 pm, 2:30 pm - 6:30 pm");
-        dateArrayEquals(new Date[] { new Date("9:00 am - 1:30 pm"), new Date("2:30 pm - 6:30 pm") }, result);
+        dateArrayEquals(new Date[]{new Date("9:00 am - 1:30 pm"), new Date("2:30 pm - 6:30 pm")}, result);
     }
 
 }

@@ -10,11 +10,22 @@ public class Latlng {
     }
 
     // Empty constructor for deserialization
-    public Latlng() { }
+    public Latlng() {
+    }
 
-    public Double getLat() { return lat; }
-    public void setLat(double value) { this.lat = value; }
+    public Double getLat() {
+        return lat;
+    }
 
-    public Double getLng() { return lng; }
-    public void setLng(double value) { this.lng = value; }
+    public void setLat(double value) {
+        this.lat = value;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public void setLng(double value) {
+        this.lng = value;
+    }
 }

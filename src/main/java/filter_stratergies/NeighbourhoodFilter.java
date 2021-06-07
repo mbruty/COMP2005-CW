@@ -10,6 +10,7 @@ public class NeighbourhoodFilter implements IFilter {
     public NeighbourhoodFilter(Neighborhood neighbourhood) {
         this.neighbourhood = neighbourhood;
     }
+
     @Override
     public boolean doCompare(Restaurant restaurant) {
         return restaurant.getNeighborhood().equals(this.neighbourhood);

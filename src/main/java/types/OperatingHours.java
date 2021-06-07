@@ -11,86 +11,107 @@ public class OperatingHours {
     private Date[] saturday;
     private Date[] sunday;
 
-    public Date[] getMonday() { return monday; }
+    public Date[] getMonday() {
+        return monday;
+    }
+
     @JsonProperty("Monday")
     public void setMonday(String value) {
-        try{
+        try {
             this.monday = stringToDateArray(value);
         } catch (IllegalArgumentException e) {
             // If the inputted time is illegal, just set the restaurant to closed
-            this.monday = new Date[] { new Date("Closed") };
+            this.monday = new Date[]{new Date("Closed")};
         }
     }
 
-    public Date[] getTuesday() { return tuesday; }
+    public Date[] getTuesday() {
+        return tuesday;
+    }
+
     @JsonProperty("Tuesday")
     public void setTuesday(String value) {
-        try{
+        try {
             this.tuesday = stringToDateArray(value);
         } catch (IllegalArgumentException e) {
             // If the inputted time is illegal, just set the restaurant to closed
-            this.tuesday = new Date[] { new Date("Closed") };
+            this.tuesday = new Date[]{new Date("Closed")};
         }
     }
 
-    public Date[] getWednesday() { return wednesday; }
+    public Date[] getWednesday() {
+        return wednesday;
+    }
+
     @JsonProperty("Wednesday")
     public void setWednesday(String value) {
-        try{
+        try {
             this.wednesday = stringToDateArray(value);
         } catch (IllegalArgumentException e) {
             // If the inputted time is illegal, just set the restaurant to closed
-            this.wednesday = new Date[] { new Date("Closed") };
+            this.wednesday = new Date[]{new Date("Closed")};
         }
     }
 
-    public Date[] getThursday() { return thursday; }
+    public Date[] getThursday() {
+        return thursday;
+    }
+
     @JsonProperty("Thursday")
     public void setThursday(String value) {
-        try{
+        try {
             this.thursday = stringToDateArray(value);
         } catch (IllegalArgumentException e) {
             // If the inputted time is illegal, just set the restaurant to closed
-            this.thursday = new Date[] { new Date("Closed") };
+            this.thursday = new Date[]{new Date("Closed")};
         }
     }
 
-    public Date[] getFriday() { return friday; }
+    public Date[] getFriday() {
+        return friday;
+    }
+
     @JsonProperty("Friday")
     public void setFriday(String value) {
-        try{
+        try {
             this.friday = stringToDateArray(value);
         } catch (IllegalArgumentException e) {
             // If the inputted time is illegal, just set the restaurant to closed
-            this.friday = new Date[] { new Date("Closed") };
+            this.friday = new Date[]{new Date("Closed")};
         }
     }
 
-    public Date[] getSaturday() { return saturday; }
+    public Date[] getSaturday() {
+        return saturday;
+    }
+
     @JsonProperty("Saturday")
     public void setSaturday(String value) {
-        try{
+        try {
             this.saturday = stringToDateArray(value);
         } catch (IllegalArgumentException e) {
             // If the inputted time is illegal, just set the restaurant to closed
-            this.tuesday = new Date[] { new Date("Closed") };
+            this.tuesday = new Date[]{new Date("Closed")};
         }
     }
 
-    public Date[] getSunday() { return sunday; }
+    public Date[] getSunday() {
+        return sunday;
+    }
+
     @JsonProperty("Sunday")
     public void setSunday(String value) {
-        try{
+        try {
             this.sunday = stringToDateArray(value);
         } catch (IllegalArgumentException e) {
             // If the inputted time is illegal, just set the restaurant to closed
-            this.sunday = new Date[] { new Date("Closed") };
+            this.sunday = new Date[]{new Date("Closed")};
         }
     }
 
     public Date[] stringToDateArray(String value) {
-        if(value.equals("Open 24 hours")) {
-            Date[] hours = new Date[] { new Date("0:00 am - 12:00 pm") };
+        if (value.equals("Open 24 hours")) {
+            Date[] hours = new Date[]{new Date("0:00 am - 12:00 pm")};
             return hours;
         }
         String[] split = value.split(",");

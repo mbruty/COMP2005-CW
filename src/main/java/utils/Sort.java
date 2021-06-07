@@ -9,8 +9,8 @@ package utils;
 // sortString will return string.charAt(i) > string.charAt(i);
 
 public class Sort<T> {
-    private ISort strategy;
     private final T[] array;
+    private ISort strategy;
 
     public Sort(ISort strategy, T[] array) {
         this.strategy = strategy;
@@ -21,17 +21,27 @@ public class Sort<T> {
         this.array = array;
     }
 
+    public ISort getStrategy() {
+        return this.strategy;
+    }
+
     public void changeStrategy(ISort strategy) {
         this.strategy = strategy;
     }
 
+    public T[] doSort(boolean shouldReturn) throws Exception {
+        this.doSort();
+        if (shouldReturn) return this.array;
+        return null;
+    }
+
     // Doesn't need to return anything as it directly changes the array
     public void doSort() throws Exception {
-        if(strategy == null) {
+        if (strategy == null) {
             throw new Exception("No strategy set!");
         }
         buildMaxHeap();
-        for(int endIndex = array.length - 1; endIndex > 0; endIndex--) {
+        for (int endIndex = array.length - 1; endIndex > 0; endIndex--) {
             doSwap(0, endIndex);
             siftDown(0, endIndex - 1);
 
@@ -40,22 +50,22 @@ public class Sort<T> {
 
     private void buildMaxHeap() {
         int firstParentIndex = (array.length - 2) / 2;
-        for(int currentIndex = firstParentIndex; currentIndex >= 0; currentIndex--) {
+        for (int currentIndex = firstParentIndex; currentIndex >= 0; currentIndex--) {
             siftDown(currentIndex, array.length - 1);
         }
     }
 
     private void siftDown(int currentIndex, int endIndex) {
         int childOneIndex = currentIndex * 2 + 1;
-        while(childOneIndex <= endIndex) {
+        while (childOneIndex <= endIndex) {
             int childTwoIndex = currentIndex * 2 + 2 <= endIndex ? currentIndex * 2 + 2 : -1;
             int indexToSwap;
-            if(childTwoIndex != -1 && strategy.doCompare(this.array[childTwoIndex], this.array[childOneIndex])) {
+            if (childTwoIndex != -1 && strategy.doCompare(this.array[childTwoIndex], this.array[childOneIndex])) {
                 indexToSwap = childTwoIndex;
             } else {
                 indexToSwap = childOneIndex;
             }
-            if(strategy.doCompare(this.array[indexToSwap], this.array[currentIndex])) {
+            if (strategy.doCompare(this.array[indexToSwap], this.array[currentIndex])) {
                 doSwap(currentIndex, indexToSwap);
                 currentIndex = indexToSwap;
                 childOneIndex = currentIndex * 2 + 1;

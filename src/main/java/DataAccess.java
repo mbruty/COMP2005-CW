@@ -1,5 +1,4 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import types.ResponseObj;
 
@@ -7,6 +6,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+
 
 public class DataAccess {
     private static final String URL = "http://intelligent-social-robots-ws.com/restaurant-data.json";
@@ -17,7 +17,7 @@ public class DataAccess {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     public static String get() {
-        try{
+        try {
             HttpRequest request = HttpRequest.newBuilder()
                     .GET()
                     .uri(URI.create(URL))

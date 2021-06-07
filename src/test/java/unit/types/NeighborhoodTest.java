@@ -1,6 +1,8 @@
-package types;
+package unit.types;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import types.Neighborhood;
 
 import java.io.IOException;
 
@@ -10,7 +12,7 @@ class NeighborhoodTest {
 
     @Test
     void toValueBrooklyn() {
-        assertEquals("Brooklyn", Neighborhood.Brooklyn.toValue());
+        Assertions.assertEquals("Brooklyn", Neighborhood.Brooklyn.toValue());
     }
 
     @Test
@@ -25,7 +27,7 @@ class NeighborhoodTest {
 
     @Test
     void forValueBrooklyn() {
-        try{
+        try {
             assertEquals(Neighborhood.Brooklyn, Neighborhood.forValue("Brooklyn"));
         } catch (Exception e) {
             fail(e.getMessage());
@@ -34,7 +36,7 @@ class NeighborhoodTest {
 
     @Test
     void forValueManhattan() {
-        try{
+        try {
             assertEquals(Neighborhood.Manhattan, Neighborhood.forValue("Manhattan"));
         } catch (Exception e) {
             fail(e.getMessage());
@@ -43,7 +45,7 @@ class NeighborhoodTest {
 
     @Test
     void forValueQueens() {
-        try{
+        try {
             assertEquals(Neighborhood.Queens, Neighborhood.forValue("Queens"));
         } catch (Exception e) {
             fail(e.getMessage());
