@@ -84,6 +84,14 @@ public class Date {
         return new int[]{hours, mins};
     }
 
+    public int[] getOpening() {
+        return new int[] {this.openHours, this.openMins};
+    }
+
+    public int[] getClosing() {
+        return new int[] {this.closeHours, this.closeMins};
+    }
+
     public String toString() {
         if (this.isClosed) return "Closed";
         return this.openHours +
